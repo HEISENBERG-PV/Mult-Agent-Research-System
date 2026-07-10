@@ -19,7 +19,7 @@ from langchain_core.prompts import ChatPromptTemplate
 model = ChatMistralAI(model = "mistral-medium-2508")
 
 # Search Agent --> search news, report etc. about the given topic
-def search_Agent():
+def build_search_Agent():
     return create_agent(
         model= model,
         tools= [web_search]
@@ -27,7 +27,7 @@ def search_Agent():
 
 
 # Reader Agent --> scrape the url and return clean and readable txt
-def reader_Agent():
+def build_reader_Agent():
     return create_agent(
         model= model,
         tools= [scrape_url]
@@ -35,7 +35,7 @@ def reader_Agent():
 
 
 
-# writer chain prompt 
+# writer chain 
 
 writer_prompt = ChatPromptTemplate.from_messages([
     ("system", "You are an expert research writer. Write clear, structured and insightful reports."),
@@ -63,7 +63,7 @@ writer_Chain = writer_prompt | model | StrOutputParser()
 # Critic Chain
 
 critic_prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are a sharp and constructive research critic. Be honest and specific."),
+    ("system", "You are a sharp and constructive research critic. Be honest and specific and concise."),
     ("human", """Review the research report below and evaluate it strictly.
 
     Report:
