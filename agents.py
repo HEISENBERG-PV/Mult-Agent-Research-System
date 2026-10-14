@@ -2,7 +2,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from langchain.agents import create_agent
-from langchain_mistralai import ChatMistralAI
+# from langchain_mistralai import ChatMistralAI
+# from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_groq import ChatGroq
 from tools.tavily_tool import web_search
 from tools.beautiful_soup import scrape_url
@@ -16,7 +17,12 @@ from langchain_core.prompts import ChatPromptTemplate
 
 
 # LLM model
-model = ChatMistralAI(model = "mistral-medium-2508")
+# model = ChatMistralAI(model = "mistral-medium-2508")
+
+model = ChatGroq(model= 'openai/gpt-oss-120b')
+
+# model = ChatGroq(model='openai/gpt-oss-120b')
+
 
 # Search Agent --> search news, report etc. about the given topic
 def build_search_Agent():
